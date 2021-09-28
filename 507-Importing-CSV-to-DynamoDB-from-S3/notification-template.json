@@ -1,0 +1,22 @@
+{
+    "LambdaFunctionConfigurations": [
+        {
+            "Id": "awscookbook507event",
+            "LambdaFunctionArn": "LAMBDA_ARN",
+            "Events": [
+                "s3:ObjectCreated:*"
+            ],
+            "Filter": {
+              "Key": {
+                "FilterRules": [
+                  {
+                    "Name": "prefix",
+                    "Value": "sample_data.csv"
+                  }
+                ]
+              }
+           }
+        }
+    ]
+}
+
