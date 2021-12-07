@@ -21,7 +21,15 @@ cdk deploy
 
 ### For this recipe, you will need to create a modified environment variable from the output: 
 
+`TRIMMED_ISOLATED_SUBNETS=$(echo ${ISOLATED_SUBNETS} | tr -d ' "')`
+
+### We also need modify this variable to have the right format
 `ISOLATED_SUBNETS=$(echo ${ISOLATED_SUBNETS} | tr -d ',"')`
+
+### Go up a directory. 
+```
+cd ..
+```
 
 ## Clean up 
 ### Delete the Cache Cluster:
@@ -69,6 +77,7 @@ aws iam detach-role-policy --role-name AWSCookbook509Lambda \
 unset LAMBDA_SG_ID
 unset LAMBDA_ARN
 unset SUBNET_IDS
+unset TRIMMED_ISOLATED_SUBNETS
 ```
 
 ### Use the AWS CDK to destroy the resources, deactivate your Python virtual environment, and go to the root of the chapter:

@@ -1,4 +1,3 @@
-
 import sys
 import logging
 import os
@@ -8,29 +7,15 @@ logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
 
-    rds_host = os.environ["DB_HOST"]
-    username = "db_user"
-    ssl = {'ca': '/opt/python/rds-combined-ca-bundle.pem'}
-
-    rds_client = session.client(
-        service_name='rds',
-        region_name=os.environ["AWS_REGION"]
-    )
-
     try:
-        auth_token = rds_client.generate_db_auth_token(rds_host, 3306, username)
-        logger.info("Got auth token!")
-    except botocore.exceptions.ClientError as e:
-        logger.error("ERROR: Could not get auth token!")
-        logger.error(e)
-        sys.exit(e)
-
-    try:
-        pymysql.connect(rds_host, user=username, passwd=auth_token, connect_timeout=5, ssl=ssl)
-        logger.info("SUCCESS: Connected to the MySQL RDS Database!")
-    except pymysql.MySQLError as e:
-        logger.error("ERROR: Could not connect to MySQL RDS Database!")
-        logger.error(e)
-        sys.exit(e)
-
-    return("Successfully connected to RDS with IAM!")
+        os.system("touch /mnt/efs/awscookbook1.txt")
+        os.system("touch /mnt/efs/awscookbook2.txt")
+        os.system("touch /mnt/efs/awscookbook3.txt")
+        for root, dirs, files in os.walk("/mnt/efs/"):
+            for filename in files:
+                print(filename)
+        logger.info("SUCCESS: Connected to EFS via /mnt/efs/ and put 3 files!")
+        return("SUCCESS: Connected to EFS via /mnt/efs/ and put 3 files!")
+    except:
+        logger.error("ERROR: Could not connect to EFS")
+        return("ERROR: Could not connect to EFS")

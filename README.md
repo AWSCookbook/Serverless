@@ -1,4 +1,4 @@
-# Chapter5 - Serverless
+# Chapter5
 ## Set and export your default region: 
 
 `export AWS_REGION=us-east-1`

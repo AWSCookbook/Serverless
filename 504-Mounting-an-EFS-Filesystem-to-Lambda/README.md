@@ -41,9 +41,12 @@ aws logs delete-log-group \
 
 ### Detach the LambdaVPCAccessExecutionPolicy from the role:
 ```
-aws iam detach-role-policy --role-name AWSCookbookLambdaRole \
+aws iam detach-role-policy --role-name AWSCookbook504Role \
 --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
 ```
+### Delete the IAM Role:
+
+`aws iam delete-role --role-name AWSCookbook504Role`
 
 ### Remove the ingress rule to the EFS File System’s Security group that allows access on port tcp 2049 from the Lambda’s Security Group:
 ```
